@@ -1,0 +1,650 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Acceso - Hotel Viñas del Sol</title>
+  <link rel="icon" type="image/png" href="../imagenes/sinfondo.png" sizes="30x30">
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap');
+
+    body {
+      margin: 0;
+      padding: 0;
+      font-family: 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #000000 0%, #0bd3e5 100%);
+      height: 100vh;
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      color: white;
+      overflow: hidden;
+    }
+
+    .form-container {
+      background: rgba(255, 255, 255, 0.1);
+      padding: 40px 35px;
+      border-radius: 15px;
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+      box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+      width: 350px;
+      text-align: center;
+      transition: all 0.4s ease;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    @media (max-width: 768px) {
+      body { 
+        overflow: auto; 
+        height: auto;
+      }
+      .form-container { 
+        width: 90%; 
+        padding: 20px 16px; 
+        margin: 40px auto;
+      }
+      .form-container h2 {
+        font-size: 1.3rem;
+      }
+      .form-container input,
+      button {
+        font-size: 0.9rem;
+        padding: 11px 12px;
+      }
+      .logo {
+        gap: 8px;
+        margin-bottom: 15px;
+      }
+      .logo img {
+        width: 50px;
+        height: 50px;
+      }
+      .logo-text h1 {
+        font-size: 1.1rem;
+      }
+      .access-options {
+        flex-wrap: wrap;
+        gap: 8px;
+      }
+      .access-options a {
+        font-size: 0.7rem;
+        padding: 6px 10px;
+      }
+    }
+    
+    @media (max-width: 480px) {
+      body { 
+        overflow: auto;
+        height: auto;
+        padding: 20px 0;
+      }
+      .form-container { 
+        width: 95%; 
+        padding: 18px 14px; 
+        margin: 30px auto;
+        border-radius: 12px;
+      }
+      .form-container h2 {
+        font-size: 1.1rem;
+        margin-bottom: 12px;
+      }
+      .form-container p {
+        font-size: 0.75rem;
+      }
+      .form-container input {
+        padding: 10px 12px;
+        margin: 8px 0;
+        font-size: 0.85rem;
+      }
+      button {
+        padding: 10px 0;
+        font-size: 0.9rem;
+        margin-top: 12px;
+      }
+      .logo {
+        gap: 6px;
+        margin-bottom: 12px;
+      }
+      .logo img {
+        width: 45px;
+        height: 45px;
+      }
+      .logo-text h1 {
+        font-size: 1rem;
+      }
+      .logo-text p {
+        font-size: 0.7rem;
+      }
+      .toggle {
+        font-size: 0.8rem;
+        margin-top: 15px;
+      }
+      .access-options {
+        flex-wrap: wrap;
+        gap: 6px;
+        margin-top: 18px;
+      }
+      .access-options a {
+        font-size: 0.65rem;
+        padding: 6px 8px;
+        flex: 0 1 calc(50% - 3px);
+      }
+      .admin-badge,
+      .employee-badge {
+        font-size: 0.6rem;
+        padding: 2px 6px;
+        margin-left: 3px;
+      }
+    }
+    
+    @media (max-width: 360px) {
+      .form-container { 
+        width: 95%;
+        padding: 16px 12px;
+        border-radius: 10px;
+      }
+      .form-container h2 {
+        font-size: 1rem;
+      }
+      .logo img {
+        width: 40px;
+        height: 40px;
+      }
+      .logo-text h1 {
+        font-size: 0.9rem;
+      }
+      .access-options a {
+        font-size: 0.6rem;
+        padding: 5px 6px;
+      }
+    }
+
+    .form-container:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 12px 40px rgba(0, 0, 0, 0.4);
+    }
+
+    .form-container h2 {
+      margin-bottom: 20px;
+      color: #fff;
+      font-weight: 600;
+    }
+
+    .form-container input {
+      width: 100%;
+      padding: 12px 15px;
+      border: none;
+      border-radius: 25px;
+      margin: 10px 0;
+      outline: none;
+      font-size: 0.95rem;
+      background: rgba(255, 255, 255, 0.15);
+      color: white;
+      transition: 0.3s;
+      box-sizing: border-box;
+    }
+
+    .form-container input:focus {
+      background: rgba(255, 255, 255, 0.25);
+      box-shadow: 0 0 0 2px #d4a574;
+    }
+
+    input::placeholder {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    button {
+      width: 100%;
+      padding: 12px 0;
+      margin-top: 15px;
+      border: none;
+      border-radius: 25px;
+      background: #d4a574;
+      color: #2c1b10;
+      font-weight: bold;
+      font-size: 1rem;
+      cursor: pointer;
+      transition: all 0.3s ease;
+    }
+
+    button:hover {
+      background: #e8b77b;
+      transform: scale(1.05);
+    }
+
+    .toggle {
+      margin-top: 20px;
+      font-size: 0.85rem;
+    }
+
+    .toggle a {
+      color: #fff;
+      text-decoration: underline;
+      cursor: pointer;
+      opacity: 0.9;
+      font-weight: 500;
+    }
+
+    .toggle a:hover {
+      opacity: 1;
+      color: #d4a574;
+    }
+
+    .logo {
+      display: flex;
+      justify-content: center;
+      align-items: center;
+      gap: 12px;
+      margin-bottom: 20px;
+    }
+
+    .logo img {
+      width: 55px;
+      height: 55px;
+      border-radius: 50%;
+      border: 2px solid #d4a574;
+      object-fit: cover;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+    }
+
+    .logo-text {
+      text-align: left;
+    }
+
+    .logo-text h1 {
+      font-size: 1.25rem;
+      margin: 0;
+      color: #fff;
+      font-weight: 700;
+    }
+
+    .logo-text p {
+      font-size: 0.75rem;
+      margin: 0;
+      color: #d4a574;
+      font-weight: 500;
+    }
+
+    .admin-badge {
+      background: #d4a574;
+      color: #2c1b10;
+      font-size: 0.65rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    .employee-badge {
+      background: #3b82f6;
+      color: white;
+      font-size: 0.65rem;
+      padding: 3px 8px;
+      border-radius: 12px;
+      font-weight: bold;
+      margin-left: 5px;
+    }
+
+    .admin-link {
+      margin-top: 30px;
+      font-size: 0.8rem;
+    }
+
+    .admin-link a {
+      color: #d4a574;
+      text-decoration: underline;
+      font-weight: bold;
+    }
+
+    .admin-link a:hover {
+      color: #e8b77b;
+    }
+
+    .access-options {
+      display: flex;
+      gap: 10px;
+      margin-top: 25px;
+      justify-content: center;
+    }
+
+    .access-options a {
+      flex: 1;
+      padding: 8px 12px;
+      background: rgba(255, 255, 255, 0.1);
+      border-radius: 20px;
+      font-size: 0.75rem;
+      color: #fff;
+      text-decoration: none;
+      transition: all 0.3s;
+      border: 1px solid rgba(255, 255, 255, 0.2);
+    }
+
+    .access-options a:hover {
+      background: rgba(255, 255, 255, 0.2);
+      transform: scale(1.05);
+    }
+
+    .glass {
+      position: absolute;
+      width: 300px;
+      height: 300px;
+      background: rgba(255, 255, 255, 0.05);
+      border-radius: 50%;
+      filter: blur(120px);
+      z-index: -1;
+    }
+
+    .glass:nth-child(1) { top: -100px; left: -100px; }
+    .glass:nth-child(2) { bottom: -100px; right: -100px; }
+
+    .text-sm {
+      font-size: 0.875rem;
+    }
+
+    .text-xs {
+      font-size: 0.75rem;
+    }
+
+    .mb-4 {
+      margin-bottom: 1rem;
+    }
+
+    .text-gray-200 {
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .text-gray-300 {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="glass"></div>
+  <div class="glass"></div>
+
+  <!-- === LOGIN HUESPED (LIBRE) === -->
+  <div class="form-container" id="loginForm">
+    <div class="logo">
+      <img src="imagenes/sinfondo.png" alt="Hotel Viñas del Sol">
+      <div class="logo-text">
+        <h1>Viñas del Sol</h1>
+        <p>Boutique Hotel</p>
+      </div>
+    </div>
+
+    <h2>Bienvenido</h2>
+    <p class="text-sm mb-4 text-gray-200">Inicia sesión o crea tu cuenta gratis</p>
+
+    <input type="email" id="loginEmail" placeholder="Correo electrónico" required>
+    <input type="password" id="loginPassword" placeholder="Contraseña" required>
+    <button onclick="loginGuest()">Ingresar</button>
+
+    <div class="toggle">
+      ¿Primera vez? <a onclick="showRegister()">Regístrate gratis</a>
+    </div>
+
+    <div class="access-options">
+      <a onclick="showAdminLogin()">👨‍💼 Admin</a>
+      <a onclick="showEmployeeLogin()">👷 Empleado</a>
+    </div>
+  </div>
+
+  <!-- === REGISTRO HUESPED (LIBRE) === -->
+  <div class="form-container" id="registerForm" style="display: none;">
+    <div class="logo">
+      <img src="imagenes/sinfondo.png" alt="Hotel Viñas del Sol">
+      <div class="logo-text">
+        <h1>Viñas del Sol</h1>
+        <p>Boutique Hotel</p>
+      </div>
+    </div>
+
+    <h2>Crear Cuenta</h2>
+    <p class="text-sm mb-4 text-gray-200">Regístrate en segundos</p>
+
+    <input type="text" id="registerName" placeholder="Nombre completo" required>
+    <input type="email" id="registerEmail" placeholder="Correo electrónico" required>
+    <input type="password" id="registerPassword" placeholder="Contraseña segura" required>
+    <button onclick="registerGuest()">Registrarme</button>
+
+    <div class="toggle">
+      ¿Ya tienes cuenta? <a onclick="showLogin()">Inicia sesión</a>
+    </div>
+  </div>
+
+  <!-- === LOGIN ADMINISTRADOR (SOLO DESIGNADOS) === -->
+  <div class="form-container" id="adminLoginForm" style="display: none;">
+    <div class="logo">
+      <img src="imagenes/sinfondo.png" alt="Hotel Viñas del Sol">
+      <div class="logo-text">
+        <h1>Viñas del Sol</h1>
+        <p>Boutique Hotel <span class="admin-badge">ADMIN</span></p>
+      </div>
+    </div>
+
+    <h2>Acceso Restringido</h2>
+    <p class="text-xs mb-4 text-gray-300">Solo administradores designados</p>
+
+    <input type="email" id="adminLoginEmail" placeholder="Correo administrador" required>
+    <input type="password" id="adminLoginPassword" placeholder="Contraseña" required>
+    <button onclick="loginAdmin()">Acceder al Panel</button>
+
+    <div class="toggle">
+      <a onclick="showLogin()">← Volver al inicio</a>
+    </div>
+  </div>
+
+  <!-- === LOGIN EMPLEADO === -->
+  <div class="form-container" id="employeeLoginForm" style="display: none;">
+    <div class="logo">
+      <img src="imagenes/sinfondo.png" alt="Hotel Viñas del Sol">
+      <div class="logo-text">
+        <h1>Viñas del Sol</h1>
+        <p>Boutique Hotel <span class="employee-badge">EMPLEADO</span></p>
+      </div>
+    </div>
+
+    <h2>Portal de Empleados</h2>
+    <p class="text-xs mb-4 text-gray-300">Acceso para personal del hotel</p>
+
+    <input type="email" id="employeeLoginEmail" placeholder="Correo corporativo" required>
+    <input type="password" id="employeeLoginPassword" placeholder="Contraseña" required>
+    <button onclick="loginEmployee()">Acceder</button>
+
+    <div class="toggle">
+      <a onclick="showLogin()">← Volver al inicio</a>
+    </div>
+  </div>
+
+  <script>
+    // === INICIALIZAR ADMINISTRADORES DESIGNADOS ===
+    const defaultAdmins = [
+      { id: 1, name: 'Juan Pérez', email: 'admin@hotel.com', password: 'admin123', role: 'Super Admin' }
+    ];
+
+    function initAdmins() {
+      if (!localStorage.getItem('admins')) {
+        localStorage.setItem('admins', JSON.stringify(defaultAdmins));
+      }
+    }
+
+    function initEmployees() {
+      if (!localStorage.getItem('employees')) {
+        localStorage.setItem('employees', JSON.stringify([]));
+      }
+    }
+
+    // === MOSTRAR FORMULARIOS ===
+    function showRegister() {
+      hideAll();
+      document.getElementById('registerForm').style.display = 'block';
+    }
+
+    function showLogin() {
+      hideAll();
+      document.getElementById('loginForm').style.display = 'block';
+    }
+
+    function showAdminLogin() {
+      hideAll();
+      document.getElementById('adminLoginForm').style.display = 'block';
+    }
+
+    function showEmployeeLogin() {
+      hideAll();
+      document.getElementById('employeeLoginForm').style.display = 'block';
+    }
+
+    function hideAll() {
+      const forms = ['loginForm', 'registerForm', 'adminLoginForm', 'employeeLoginForm'];
+      forms.forEach(id => document.getElementById(id).style.display = 'none');
+    }
+
+    // === REGISTRO HUESPED (LIBRE - CUALQUIERA) ===
+    function registerGuest() {
+      const name = document.getElementById('registerName').value.trim();
+      const email = document.getElementById('registerEmail').value.trim().toLowerCase();
+      const password = document.getElementById('registerPassword').value;
+
+      if (!name || !email || !password) {
+        alert("Completa todos los campos");
+        return;
+      }
+
+      if (password.length < 6) {
+        alert("La contraseña debe tener al menos 6 caracteres");
+        return;
+      }
+
+      const guests = JSON.parse(localStorage.getItem('guests') || '[]');
+
+      if (guests.some(g => g.email === email)) {
+        alert("Este correo ya está registrado.");
+        return;
+      }
+
+      const newGuest = {
+        id: Date.now(),
+        name,
+        email,
+        password,
+        role: 'guest',
+        registeredAt: new Date().toLocaleString('es-PE')
+      };
+
+      guests.push(newGuest);
+      localStorage.setItem('guests', JSON.stringify(guests));
+
+      alert(`¡Bienvenido, ${name}! Tu cuenta ha sido creada.`);
+      showLogin();
+    }
+
+    // === LOGIN HUESPED (LIBRE) ===
+    function loginGuest() {
+      const email = document.getElementById('loginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('loginPassword').value;
+
+      if (!email || !password) {
+        alert("Completa todos los campos");
+        return;
+      }
+
+      const guests = JSON.parse(localStorage.getItem('guests') || '[]');
+      const guest = guests.find(g => g.email === email && g.password === password);
+
+      if (!guest) {
+        alert("Correo o contraseña incorrectos.");
+        return;
+      }
+
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userRole', 'guest');
+      localStorage.setItem('currentUser', JSON.stringify(guest));
+      localStorage.setItem('user', JSON.stringify(guest));
+
+      alert(`¡Hola de nuevo, ${guest.name}!`);
+      window.location.href = "pages/homepage.html";
+    }
+
+    // === LOGIN ADMINISTRADOR (SOLO DESIGNADOS) ===
+    function loginAdmin() {
+      const email = document.getElementById('adminLoginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('adminLoginPassword').value;
+
+      if (!email || !password) {
+        alert("Completa todos los campos");
+        return;
+      }
+
+      const admins = JSON.parse(localStorage.getItem('admins') || '[]');
+      const admin = admins.find(a => a.email === email && a.password === password);
+
+      if (!admin) {
+        alert("Acceso denegado. Solo administradores designados.");
+        return;
+      }
+
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userRole', 'admin');
+      localStorage.setItem('currentAdmin', JSON.stringify(admin));
+
+      alert(`¡Bienvenido, ${admin.role}: ${admin.name}!`);
+      window.location.href = "admin/dashboard.html";
+    }
+
+    // === LOGIN EMPLEADO (CORREGIDO) ===
+    function loginEmployee() {
+      const email = document.getElementById('employeeLoginEmail').value.trim().toLowerCase();
+      const password = document.getElementById('employeeLoginPassword').value;
+
+      if (!email || !password) {
+        alert("Completa todos los campos");
+        return;
+      }
+
+      const employees = JSON.parse(localStorage.getItem('employees') || '[]');
+      const employee = employees.find(e => e.email === email && e.password === password);
+
+      if (!employee) {
+        alert("Credenciales incorrectas. Contacta al administrador si necesitas acceso.");
+        return;
+      }
+
+      if (employee.status === 'Inactivo') {
+        alert("Tu cuenta está desactivada. Contacta al administrador.");
+        return;
+      }
+
+      localStorage.setItem('isLoggedIn', 'true');
+      localStorage.setItem('userRole', 'employee');
+      localStorage.setItem('currentEmployee', JSON.stringify(employee));
+
+      alert(`¡Bienvenido, ${employee.name}!`);
+      // ✅ CORRECCIÓN: Ruta correcta a la carpeta "empleado"
+      window.location.href = "empleado/panel.html";
+    }
+
+    // === REDIRECCIÓN AUTOMÁTICA (CORREGIDA) ===
+    window.onload = function() {
+      initAdmins();
+      initEmployees();
+
+      const isLoggedIn = localStorage.getItem('isLoggedIn') === 'true';
+      const role = localStorage.getItem('userRole');
+
+      if (isLoggedIn && role === 'guest') {
+        window.location.href = "pages/homepage.html";
+      } else if (isLoggedIn && role === 'admin') {
+        window.location.href = "admin/dashboard.html";
+      } else if (isLoggedIn && role === 'employee') {
+        // ✅ CORRECCIÓN: Ruta correcta a la carpeta "empleado"
+        window.location.href = "empleado/panel.html";
+      } else {
+        showLogin();
+      }
+    };
+  </script>
+</body>
+</html>
